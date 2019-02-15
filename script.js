@@ -5,6 +5,7 @@ roleMap.set(2,"Support");
 
 document.getElementById("Submit").addEventListener("click", function(event) {
   let teamID = 1;
+  let games = [];
   event.preventDefault();
   const value = document.getElementById("Input").value;
   if (value === "")
@@ -17,12 +18,11 @@ document.getElementById("Submit").addEventListener("click", function(event) {
     }).then(function(json) {
       let found = [];
       for(let i = 0; i < json.length; i++) {
-        //console.log("iterating step: " + i);
+        //Iterate through all pro players looking for team members
         if(json[i].team_name === value) {
           found.push(json[i]);
           teamID = json[i].team_id;
-          console.log("Team ID is: " + teamID);
-          console.log("Found match:" + json[i].team_name + json[i].name);
+          //console.log("Found match:" + json[i].team_name + json[i].name);
         }
       }
       console.log("Size of results: " + found.length);
@@ -43,9 +43,12 @@ document.getElementById("Submit").addEventListener("click", function(event) {
         .then(function(response) {
           return response.json();
         }).then(function(json) {
-          for(let i = 0; i < json.length; i++) {
-            console.log("This is a row of the table" + i);
+          //Iterate through games in array
+          for(let i = 0; i < json.rows.length; i++) {
+            games.push(json.rows[i].match_id);
           }
         });
+    }).then(function(response) {
+      const
     });
 });
