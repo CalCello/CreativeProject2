@@ -38,17 +38,17 @@ document.getElementById("Submit").addEventListener("click", function(event) {
       document.getElementById("Results").innerHTML = results;
     }).then(function(response) {
       console.log("Team ID is: " + teamID);
-      const url2 = "https://api.opendota.com/api/explorer?sql=select%20*%20from%20team_match%20WHERE%20TEAM_ID%20%3D%20%27"+ teamID +"%27%20limit%2010";
+      const url2 = "https://api.opendota.com/api/explorer?sql=SELECT%20*%20FROM%20team_match%20WHERE%20team_id%20%3D%20" + teamID + "%20ORDER%20BY%20match_id%20DESC%20limit%2010";
       fetch(url2)
         .then(function(response) {
           return response.json();
         }).then(function(json) {
           //Iterate through games in array
           for(let i = 0; i < json.rows.length; i++) {
+            //console.log("test " + i);
             games.push(json.rows[i].match_id);
           }
         });
     }).then(function(response) {
-      const
     });
 });
