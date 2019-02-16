@@ -56,6 +56,29 @@ footer {
   overflow: auto;
 }
 
+.teamGames {
+  padding: 8px;
+  text-align: center;
+  background-color: #B22222;
+  overflow: auto;
+}
+
+.wonGame {
+  text-align: center;
+  text: green;
+  padding: 20px;
+  background: #2F4F4F;
+  margin: 10px;
+}
+
+.lostGame {
+  text-align: center;
+  text: red;
+  padding: 20px;
+  background: #2F4F4F;
+  margin: 10px;
+}
+
 input {
   margin: 5px;
   padding: 4px;

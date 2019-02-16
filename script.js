@@ -6,6 +6,9 @@ roleMap.set(2,"Support");
 document.getElementById("Submit").addEventListener("click", function(event) {
   let teamID = 1;
   let games = [];
+  let gameSummaries = [];
+  let results = "";
+  let results2 = "<div class=\"teamGames\">";
   event.preventDefault();
   const value = document.getElementById("Input").value;
   if (value === "")
@@ -16,6 +19,7 @@ document.getElementById("Submit").addEventListener("click", function(event) {
     .then(function(response) {
       return response.json();
     }).then(function(json) {
+      //This section finds the roster of a team given the team name.
       let found = [];
       for(let i = 0; i < json.length; i++) {
         //Iterate through all pro players looking for team members
@@ -26,7 +30,6 @@ document.getElementById("Submit").addEventListener("click", function(event) {
         }
       }
       console.log("Size of results: " + found.length);
-      let results = "";
       results += "<div class=\"teamResult\"><h2>" + value + "</h2>";
       for(let i = 0; i < found.length; i++) {
         results += "<div class=\"player\"> <img src=\"" + found[i].avatarmedium + "\" align=\"left\"><p>" + found[i].name + " [Role: " + roleMap.get(found[i].fantasy_role) + "]</p></div>";
@@ -36,19 +39,5 @@ document.getElementById("Submit").addEventListener("click", function(event) {
         results += "Team not found.";
       }
       document.getElementById("Results").innerHTML = results;
-    }).then(function(response) {
-      console.log("Team ID is: " + teamID);
-      const url2 = "https://api.opendota.com/api/explorer?sql=SELECT%20*%20FROM%20team_match%20WHERE%20team_id%20%3D%20" + teamID + "%20ORDER%20BY%20match_id%20DESC%20limit%2010";
-      fetch(url2)
-        .then(function(response) {
-          return response.json();
-        }).then(function(json) {
-          //Iterate through games in array
-          for(let i = 0; i < json.rows.length; i++) {
-            //console.log("test " + i);
-            games.push(json.rows[i].match_id);
-          }
-        });
-    }).then(function(response) {
     });
 });
